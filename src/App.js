@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
 
 class App extends Component {
-  render() {
+  render () {
     const init = {
-      method: "GET"
+      method: 'GET'
     }
     fetch('http://localhost:3000/api/login', init)
       .then(res => {
-        console.log("We are good to go!")
+        console.log('We are good to go!')
       })
       .catch(err => {
         console.log(err)
       })
-      
+
     return (
       <div className="App">
         <header className="App-header">
@@ -25,8 +25,8 @@ class App extends Component {
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
