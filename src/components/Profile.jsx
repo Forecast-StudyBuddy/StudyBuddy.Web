@@ -6,17 +6,29 @@ class Profile extends Component {
     super(props)
 
     this.state = {
-      isUserHelping: false
+      requests: [
+        {name: 'Darrell',
+          course: 'CS190',
+          text: 'I have no idea what to do with life.',
+          status: 'Finished'
+        },
+        {name: 'Gemma',
+          course: 'MA161',
+          text: 'This course is hard.',
+          status: 'Finished'
+        }
+      ]
     }
   }
-
+  
   render () {
     return (
       <div>
         <br/>
-        <RequestsCard areAcceptedRequests={false}/>
+        <RequestsCard areAcceptedRequests={false} allowAccept={false} requests={this.state.requests}/>
         <br/>
-        <RequestsCard areAcceptedRequests={true}/>
+        <RequestsCard areAcceptedRequests={true} allowAccept={false} requests={this.state.requests}/>
+        />
       </div>
     )
   }

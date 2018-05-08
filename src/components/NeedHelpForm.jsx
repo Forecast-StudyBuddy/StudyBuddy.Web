@@ -54,7 +54,8 @@ class NeedHelpForm extends Component {
           style={{marginBottom: 16}}
         />
         <TextField
-          hintText="What do you need help with? (Please be as specific as you can, so helpers have a better idea of what you need help with)"
+          hintText="What do you need help with? (Please be as specific as you can,
+            so helpers have a better idea of what you need help with)"
           multiLine={true}
           rows={2}
           rowsMax={4}

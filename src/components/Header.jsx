@@ -22,7 +22,8 @@ const MenuIcon = props => (
 class Header extends Component {
   render () {
     return (
-      <AppBar title="Study Buddy" iconElementRight={<MenuIcon />}/>
+      <AppBar title="Study Buddy" iconElementLeft={<div/>} iconElementRight={<MenuIcon />}
+        onTitleClick={() => window.location = '/'}/>
     )
   }
 }
