@@ -14,7 +14,7 @@ const MenuIcon = props => (
     targetOrigin={{horizontal: 'left', vertical: 'bottom'}}
     anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
   >
-    <MenuItem primaryText="Profile" />
+    <MenuItem primaryText="Profile" href="/profile"/>
     <MenuItem primaryText="Sign out" />
   </IconMenu>
 )
