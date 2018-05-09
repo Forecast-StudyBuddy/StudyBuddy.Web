@@ -54,8 +54,8 @@ class RequestsCard extends Component {
 							</TableRow>
 						</TableHeader>
 						<TableBody displayRowCheckbox={false}>
-							{requests.map(request =>
-								<TableRow>
+							{requests.map((request, index) =>
+								<TableRow key={index}>
 									<TableRowColumn>{request.name}</TableRowColumn>
 									<TableRowColumn>{request.course}</TableRowColumn>
 									<TableRowColumn>{request.text}</TableRowColumn>

@@ -59,7 +59,7 @@ class Dashboard extends Component {
     }
 
     onAcceptRequest = () => {
-
+        console.log(window.localStorage.getItem("email"))
     }
 
   render () {

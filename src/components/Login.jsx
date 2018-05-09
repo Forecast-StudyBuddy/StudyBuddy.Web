@@ -27,7 +27,30 @@ class Login extends Component {
   setPassword = (event, password) => this.setState({ password })
 
   onClickLogin = () => {
+    // temp
+		const body = {
+			email: this.state.email,
+			password: this.state.password
+		}
 
+		const init = {
+		  method: "POST",
+		  headers: { 'content-type': 'application/json' },
+		  body: JSON.stringify(body)
+		}
+
+		fetch("http://localhost:48480/api/login", init)
+			.then(res => {
+        if (res.status === 200) {
+          window.localStorage.setItem("email", this.state.email)
+          window.location = "/dashboard"
+        } else {
+
+        }
+			})
+			.catch(err => {
+				console.log(err)
+			})
   }
 
   render () {
