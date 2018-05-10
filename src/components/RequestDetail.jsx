@@ -37,9 +37,8 @@ class RequestDetail extends Component {
 				modal={true}
 				open={shouldOpen}
 			>
-        Request
 				<br/>
-				{request && request.course}
+				{request && request.course_id}
 				<br/>
 				{request && request.text}
 			</Dialog>

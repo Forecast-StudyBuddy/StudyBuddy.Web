@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import RequestsCard from './RequestsCard'
 import SelectField from "material-ui/SelectField"
 import MenuItem from "material-ui/MenuItem"
+import ConfirmationPopup from './ConfirmaionPopup'
 
 class AcceptRequest extends Component {
   constructor (props) {
@@ -9,11 +10,20 @@ class AcceptRequest extends Component {
 
     this.state = {
         userCourses: [],
-        courseIndex: 0
+        courseIndex: 0,
+        requests: [],
+        filteredRequests: [],
+        shouldOpenConfirmation: false,
+        requesterEmail: null
     }
   }
 
     componentWillMount() {
+        this.fetchUserCourses()
+        this.fetchRequests()
+    }
+
+    fetchUserCourses = () => {
         const body = {
             email: window.localStorage.getItem("email")
         }
@@ -36,44 +46,58 @@ class AcceptRequest extends Component {
             })
     }
 
-    onAcceptRequest = () => {
-        console.log(window.localStorage.getItem("email"))
+    fetchRequests = () => {
+        const body = {
+            email: window.localStorage.getItem("email")
+        }
+
+        const init = {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(body)
+        }
+
+        fetch("http://localhost:48480/api/openRequests", init)
+            .then(res => {
+                return res.json()
+            })
+            .then(data => {
+                this.setState({ requests: data }, () => this.handleChange(null, 0))
+            })
+            .catch(err => {
+                throw err
+            })
+    }
+
+    onAcceptRequest = request => {
+        const body = {
+            email: window.localStorage.getItem("email"),
+            requestId: request.id
+        }
+
+        const init = {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(body)
+        }
+
+        fetch("http://localhost:48480/api/acceptRequest", init)
+            .then(res => {
+                this.setState({ shouldOpenConfirmation: true, requesterEmail: request.user_id })
+            })
+            .catch(err => {
+                throw err
+            })
     }
 
     handleChange = (event, key) => {
-        this.setState({ courseIndex: key })
+        const {userCourses, requests} = this.state
+        const filteredRequests = requests.filter(req => req.course_id === userCourses[key].id )
+        this.setState({ courseIndex: key, filteredRequests })
     }
 
   render () {
-      const { userCourses, courseIndex } = this.state
-
-        const requests = [
-            {name: 'Student 1',
-                course: 'CS110',
-                text: 'fjadokf jadkf jakdf joadkfj oajkdfa ',
-                status: 'Finished'
-            },
-            {name: 'Student 2',
-                course: 'MA210',
-                text: 'fdaf dk aof adkf adfjdakfajod ',
-                status: 'Finished'
-            },
-            {name: 'Student 3',
-                course: 'MUS233',
-                text: 'owk fow fkwjfkwjfowkej fowef ',
-                status: 'Finished'
-            },
-            {name: 'Student 4',
-                course: 'ECON321',
-                text: 'adsfadfaod fjaokdf jaosdk fji fjow ',
-                status: 'Finished'
-            },
-            {name: 'Student 5',
-                course: 'ENGL100',
-                text: 'oo adof oaf diadjfjefwojfow  ',
-                status: 'Finished'
-            },
-        ]
+      const { userCourses, courseIndex, filteredRequests, shouldOpenConfirmation, requesterEmail } = this.state
 
     return (
         <div>
@@ -93,8 +117,12 @@ class AcceptRequest extends Component {
             </SelectField>
             <br/>
             <RequestsCard areAcceptedRequests={false} allowAccept={true} allowFinish={false}
-                requests={requests}
+                requests={filteredRequests}
                 onAccept={this.onAcceptRequest}/>
+            <ConfirmationPopup shouldOpen={shouldOpenConfirmation} title="Confirmation" text={`Thank you for accepting the help request! You
+                can now email ${requesterEmail} to study together!`} onConfirm={() => {this.setState({ shouldOpenConfirmation: false })
+                this.fetchRequests()
+                }}/>
         </div>
         
     )

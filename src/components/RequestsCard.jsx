@@ -45,7 +45,6 @@ class RequestsCard extends Component {
 					<Table selectable onCellClick={this.onCellClick}>
 						<TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
 							<TableRow>
-								<TableHeaderColumn>Name</TableHeaderColumn>
 								<TableHeaderColumn>Course</TableHeaderColumn>
 								<TableHeaderColumn>Request</TableHeaderColumn>
 								{ areAcceptedRequests &&
@@ -56,8 +55,7 @@ class RequestsCard extends Component {
 						<TableBody displayRowCheckbox={false}>
 							{requests.map((request, index) =>
 								<TableRow key={index}>
-									<TableRowColumn>{request.name}</TableRowColumn>
-									<TableRowColumn>{request.course}</TableRowColumn>
+									<TableRowColumn>{request.course_id}</TableRowColumn>
 									<TableRowColumn>{request.text}</TableRowColumn>
 									{areAcceptedRequests &&
                     <TableRowColumn>{request.status}</TableRowColumn>
@@ -71,7 +69,7 @@ class RequestsCard extends Component {
 					allowFinish={allowFinish}
 					onFinish={onFinish}
 					request={requests[currentViewCellIndex]}
-					onClose={this.onCloseRequestDetail} onAccept={() => {onAccept() 
+					onClose={this.onCloseRequestDetail} onAccept={() => {onAccept(requests[currentViewCellIndex]) 
 						this.onCloseRequestDetail()}} />
 			</div>
 		)
