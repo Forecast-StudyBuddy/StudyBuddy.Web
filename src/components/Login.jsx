@@ -27,7 +27,6 @@ class Login extends Component {
   setPassword = (event, password) => this.setState({ password })
 
   onClickLogin = () => {
-    // temp
 		const body = {
 			email: this.state.email,
 			password: this.state.password

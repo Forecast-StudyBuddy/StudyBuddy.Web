@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import "./App.css"
 import Header from "./components/Header"
 import lightBaseTheme from "material-ui/styles/baseThemes/lightBaseTheme"
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider"

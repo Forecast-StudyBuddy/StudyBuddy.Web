@@ -17,7 +17,6 @@ class NeedHelpForm extends Component {
 	}
 
 	componentWillMount() {
-		// temp
 		const body = {
 			email: window.localStorage.getItem("email")
 		}
