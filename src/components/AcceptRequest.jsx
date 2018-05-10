@@ -87,7 +87,7 @@ class AcceptRequest extends Component {
 			>
                 {
                     userCourses.map((userCourse, index) => {
-                        return <MenuItem key={index} value={index} primaryText={userCourse.course_name} />
+                        return <MenuItem key={index} value={index} primaryText={`${userCourse.id} - ${userCourse.course_name}`} />
                     })
 					}
             </SelectField>

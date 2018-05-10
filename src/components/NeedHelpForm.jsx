@@ -76,7 +76,7 @@ class NeedHelpForm extends Component {
 				>
 					{
 						currentCourses.map((currentCourse, index) => {
-							return <MenuItem key={index} value={index} primaryText={currentCourse.course_name} />
+							return <MenuItem key={index} value={index} primaryText={`${currentCourse.id} - ${currentCourse.course_name}`} />
 						})
 					}
 				</SelectField>
@@ -86,7 +86,7 @@ class NeedHelpForm extends Component {
 				/>
 				<TextField
 					hintText="What do you need help with? (Please be as specific as you can,
-            so helpers have a better idea of what you need help with)"
+            			so helpers have a better idea of what you need help with)"
 					multiLine={true}
 					rows={2}
 					rowsMax={4}
