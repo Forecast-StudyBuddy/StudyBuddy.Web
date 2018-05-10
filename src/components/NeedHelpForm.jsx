@@ -11,12 +11,42 @@ class NeedHelpForm extends Component {
 		super(props)
 
 		this.state = {
-			isUserHelping: false
+			currentCourses: [],
+			courseIndex: 0
 		}
+	}
+
+	componentWillMount() {
+		// temp
+		const body = {
+			email: window.localStorage.getItem("email")
+		}
+
+		const init = {
+			method: "POST",
+			headers: { "content-type": "application/json" },
+			body: JSON.stringify(body)
+		}
+
+		fetch("http://localhost:48480/api/currentCourses", init)
+			.then(res => {
+				return res.json()
+			})
+			.then(data => {
+				this.setState({ currentCourses: data })
+			})
+			.catch(err => {
+				throw err
+			})
+	}
+
+	handleChange = (event, key) => {
+		this.setState({ courseIndex: key })
 	}
 
 	render () {
 		const { shouldOpen } = this.props
+		const { currentCourses, courseIndex } = this.state
 
 		const actions = [
 			<FlatButton
@@ -39,15 +69,17 @@ class NeedHelpForm extends Component {
 				modal={true}
 				open={shouldOpen}
 			>
-        Select a course you would like help with
+        		Select a course you would like help with
 				<SelectField
 					floatingLabelText="Course"
-					value={true}
+					value={courseIndex}
 					onChange={this.handleChange}
 				>
-					<MenuItem value={null} primaryText="" />
-					<MenuItem value={false} primaryText="No" />
-					<MenuItem value={true} primaryText="Yes" />
+					{
+						currentCourses.map((currentCourse, index) => {
+							return <MenuItem key={index} value={index} primaryText={currentCourse.course_name} />
+						})
+					}
 				</SelectField>
 				<Checkbox
 					label="Do you prefer to have someone who is in the same class with you?"
