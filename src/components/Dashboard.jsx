@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import OfferHelpForm from './OfferHelpForm'
 import NeedHelpForm from './NeedHelpForm'
-import RequestsCard from './RequestsCard'
 
 class Dashboard extends Component {
   constructor (props) {
@@ -43,7 +42,7 @@ class Dashboard extends Component {
   }
 
     onClickWantToHelp = () => {
-        this.setState({ isEditingWantToHelpForm: true })
+        window.location = "/offerHelp"
     }
 
     onFinishFillingWantToHelpForm = () => {
@@ -71,8 +70,6 @@ class Dashboard extends Component {
         <br/>
         <br/>
         <RaisedButton label="I need help" primary onClick={this.onClickNeedHelp} />
-        <RequestsCard areAcceptedRequests={false} allowAccept={true} onCellClick={this.onCellClick} requests={this.state.requests}
-        onAccept={this.onAcceptRequest}/>
         <OfferHelpForm shouldOpen={isEditingWantToHelpForm} onFinishFillingWantToHelpForm={this.onFinishFillingWantToHelpForm}/>
         <NeedHelpForm shouldOpen={isEditingNeedHelpForm} onFinishFillingWantToHelpForm={this.onFinishFillingNeedHelpForm}/>
       </div>

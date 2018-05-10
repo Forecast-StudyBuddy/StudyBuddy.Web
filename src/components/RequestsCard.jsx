@@ -36,7 +36,7 @@ class RequestsCard extends Component {
 	}
 
 	render () {
-		const { areAcceptedRequests, requests, allowAccept, onAccept } = this.props
+		const { areAcceptedRequests, requests, allowAccept, onAccept, allowFinish, onFinish } = this.props
 		const { currentViewCellIndex } = this.state
 
 		return (
@@ -67,7 +67,10 @@ class RequestsCard extends Component {
 						</TableBody>
 					</Table>
 				</Paper>
-				<RequestDetail shouldOpen={currentViewCellIndex !== null} allowAccept={allowAccept} request={requests[currentViewCellIndex]}
+				<RequestDetail shouldOpen={currentViewCellIndex !== null} allowAccept={allowAccept} 
+					allowFinish={allowFinish}
+					onFinish={onFinish}
+					request={requests[currentViewCellIndex]}
 					onClose={this.onCloseRequestDetail} onAccept={() => {onAccept() 
 						this.onCloseRequestDetail()}} />
 			</div>

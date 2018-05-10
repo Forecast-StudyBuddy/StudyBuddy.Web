@@ -4,7 +4,7 @@ import Dialog from "material-ui/Dialog"
 
 class RequestDetail extends Component {
 	render () {
-		const { shouldOpen, request, allowAccept, onAccept } = this.props
+		const { shouldOpen, request, allowAccept, onAccept, allowFinish, onFinish } = this.props
 
 		var actions = [
 			<FlatButton
@@ -19,6 +19,14 @@ class RequestDetail extends Component {
 				label="Accept"
 				secondary
 				onClick={onAccept}
+			/>)
+		}
+
+		if (allowFinish) {
+			actions.push(<FlatButton
+				label="Finish"
+				secondary
+				onClick={onFinish}
 			/>)
 		}
 

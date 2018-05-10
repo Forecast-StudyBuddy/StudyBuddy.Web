@@ -20,14 +20,22 @@ class Profile extends Component {
 			]
 		}
 	}
+
+	onFinishRequest = () => {
+
+	}
   
 	render () {
 		return (
 			<div>
 				<br/>
-				<RequestsCard areAcceptedRequests={false} allowAccept={false} requests={this.state.requests}/>
+				My Requests<br/>
+				<RequestsCard areAcceptedRequests={false} allowAccept={false} allowFinish={true}
+					onFinish={this.onFinishRequest} requests={this.state.requests}/>
 				<br/>
-				<RequestsCard areAcceptedRequests={true} allowAccept={false} requests={this.state.requests}/>
+				Accepted Requests<br/>
+				<RequestsCard areAcceptedRequests={true} allowAccept={false} allowFinish={false}
+					requests={this.state.requests}/>
         />
 			</div>
 		)
