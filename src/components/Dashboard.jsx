@@ -72,25 +72,26 @@ class Dashboard extends Component {
 
       }
       const buttonStyle = {
-        width:'35%',
-        height: '100px',
+        width:'40%',
+        height: '75px',
         margin: '5px',
         textAlign: 'center',
         verticalAlign: 'middle !important',
-        position: 'relative',
+        position: 'relative'
     }
       const divider = {
-        width:'15%',
+        width:'5%',
         height:'auto',
         display:'inline-block'
     }
     return (
       <Grid >
-        <br/>
+        <h3>Welcome to Studdy Buddy! </h3>
+        <h4>We provide academic platform to help and get help from your peers </h4>
         <div style={style}>
-            <RaisedButton style={buttonStyle} label="I would like to help" primary onClick={this.onClickWantToHelp}/>
+            <RaisedButton style={buttonStyle} labelStyle={{fontSize: '20px', verticalAlign: 'middle', textAlign: 'center', padding:'25px'}} label="I would like to help" primary onClick={this.onClickWantToHelp}/>
             <div style={divider} />
-            <RaisedButton style={buttonStyle}  label="I need help" primary onClick={this.onClickNeedHelp} />
+            <RaisedButton style={buttonStyle} labelStyle={{fontSize: '20px', verticalAlign: 'middle', textAlign: 'center', padding:'25px'}} label="I need help" primary onClick={this.onClickNeedHelp} />
         </div>
         <br/>
         <br/>
