@@ -48,7 +48,7 @@ class RequestsCard extends Component {
 								<TableHeaderColumn>Course</TableHeaderColumn>
 								<TableHeaderColumn>Request</TableHeaderColumn>
 								{ areAcceptedRequests &&
-                <TableHeaderColumn>Status</TableHeaderColumn>
+                					<TableHeaderColumn>Status</TableHeaderColumn>
 								}
 							</TableRow>
 						</TableHeader>
@@ -58,7 +58,7 @@ class RequestsCard extends Component {
 									<TableRowColumn>{request.course_id}</TableRowColumn>
 									<TableRowColumn>{request.text}</TableRowColumn>
 									{areAcceptedRequests &&
-                    <TableRowColumn>{request.status}</TableRowColumn>
+                    					<TableRowColumn>Helping</TableRowColumn>
 									}
 								</TableRow>
 							)}
@@ -67,7 +67,9 @@ class RequestsCard extends Component {
 				</Paper>
 				<RequestDetail shouldOpen={currentViewCellIndex !== null} allowAccept={allowAccept} 
 					allowFinish={allowFinish}
-					onFinish={onFinish}
+					onFinish={() => {onFinish(requests[currentViewCellIndex].id)
+						this.setState({ currentViewCellIndex: null})
+						}}
 					request={requests[currentViewCellIndex]}
 					onClose={this.onCloseRequestDetail} onAccept={() => {onAccept(requests[currentViewCellIndex]) 
 						this.onCloseRequestDetail()}} />

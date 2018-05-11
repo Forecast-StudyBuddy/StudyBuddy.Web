@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import RaisedButton from 'material-ui/RaisedButton'
 import OfferHelpForm from './OfferHelpForm'
 import NeedHelpForm from './NeedHelpForm'
+import ConfirmationPopup from './ConfirmaionPopup'
 
 class Dashboard extends Component {
   constructor (props) {
@@ -11,6 +12,7 @@ class Dashboard extends Component {
       isUserHelping: false,
       isEditingWantToHelpForm: false,
       isEditingNeedHelpForm: false,
+      shouldOpenConfirmation: false,
       requests:[
         {name: 'Student 1',
             course: 'CS110',
@@ -61,8 +63,12 @@ class Dashboard extends Component {
         console.log(window.localStorage.getItem("email"))
     }
 
+    onNeedHelpRequestSubmitted = () => {
+        this.setState({ shouldOpenConfirmation: true })
+    }
+
   render () {
-    const {isEditingWantToHelpForm, isEditingNeedHelpForm} = this.state
+    const {isEditingWantToHelpForm, isEditingNeedHelpForm, shouldOpenConfirmation} = this.state
     return (
       <div>
         <br/>
@@ -71,7 +77,11 @@ class Dashboard extends Component {
         <br/>
         <RaisedButton label="I need help" primary onClick={this.onClickNeedHelp} />
         <OfferHelpForm shouldOpen={isEditingWantToHelpForm} onFinishFillingWantToHelpForm={this.onFinishFillingWantToHelpForm}/>
-        <NeedHelpForm shouldOpen={isEditingNeedHelpForm} onFinishFillingWantToHelpForm={this.onFinishFillingNeedHelpForm}/>
+        <NeedHelpForm shouldOpen={isEditingNeedHelpForm} onFinishFillingWantToHelpForm={this.onFinishFillingNeedHelpForm}
+            onNeedHelpRequestSubmitted={this.onNeedHelpRequestSubmitted}/>
+        <ConfirmationPopup shouldOpen={shouldOpenConfirmation} title="Confirmation" text={`Thank you for submitting a help request! You
+                will receive an email once your peer accepts your request!`} onConfirm={() => {this.setState({ shouldOpenConfirmation: false })
+                }}/>
       </div>
     )
   }

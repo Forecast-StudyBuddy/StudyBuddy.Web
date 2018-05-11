@@ -12,7 +12,8 @@ class NeedHelpForm extends Component {
 
 		this.state = {
 			currentCourses: [],
-			courseIndex: 0
+			courseIndex: 0,
+			text: ''
 		}
 	}
 
@@ -43,6 +44,34 @@ class NeedHelpForm extends Component {
 		this.setState({ courseIndex: key })
 	}
 
+	onTextChange = (event, newValue) => {
+		this.setState({ text: newValue })
+	}
+
+	onSubmitNeedHelpForm = () => {
+		const body = {
+			email: window.localStorage.getItem("email"),
+			courseId: this.state.currentCourses[this.state.courseIndex].id,
+			text: this.state.text
+		}
+
+		const init = {
+			method: "POST",
+			headers: { "content-type": "application/json" },
+			body: JSON.stringify(body)
+		}
+
+		fetch("http://localhost:48480/api/requestAssistance", init)
+			.then(res => {
+				if (res.ok)
+					this.props.onNeedHelpRequestSubmitted()
+			})
+			.catch(err => {
+				throw err
+			})
+		this.props.onFinishFillingWantToHelpForm()
+	}
+
 	render () {
 		const { shouldOpen } = this.props
 		const { currentCourses, courseIndex } = this.state
@@ -50,14 +79,13 @@ class NeedHelpForm extends Component {
 		const actions = [
 			<FlatButton
 				label="Cancel"
-				primary={true}
+				primary
 				onClick={this.props.onFinishFillingWantToHelpForm}
 			/>,
 			<FlatButton
 				label="Submit"
-				primary={true}
-				disabled={true}
-				onClick={this.props.onFinishFillingWantToHelpForm}
+				secondary
+				onClick={this.onSubmitNeedHelpForm}
 			/>
 		]
 
@@ -90,6 +118,7 @@ class NeedHelpForm extends Component {
 					multiLine={true}
 					rows={2}
 					rowsMax={4}
+					onChange={this.onTextChange}
 				/>
 			</Dialog>
 		)
