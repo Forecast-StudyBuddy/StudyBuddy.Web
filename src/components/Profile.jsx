@@ -6,29 +6,72 @@ class Profile extends Component {
 		super(props)
 
 		this.state = {
-			requests: [
-				{name: "Darrell",
-					course: "CS190",
-					text: "I have no idea what to do with life.",
+			myrequests: [
+				{
+					name: "null",
+					course: "null",
+					text: "null",
 					status: "Finished"
-				},
-				{name: "Gemma",
-					course: "MA161",
-					text: "This course is hard.",
+				}],
+			acceptedRequests:[{
+					name: "",
+					course: "",
+					text: "",
 					status: "Finished"
-				}
-			]
+				}]
 		}
 	}
-  
+	componentWillMount(){
+		this.get_all_requests()
+		this.get_posted_requests()
+	}
+
+get_all_requests = () => {
+	const body = {
+		email: window.localStorage.getItem("email")
+	}
+
+	const init = {
+	  method: "POST",
+	  headers: { "content-type": "application/json" },
+	  body : JSON.stringify(body)
+	}
+	fetch("http://localhost:48480/api/acceptedRequests", init)
+		.then(res => {
+			if (res.status === 200) {
+		}
+	}).catch(err => {
+			console.log(err)
+		})
+	}
+	get_posted_requests = () => {
+		const body = {
+			email: window.localStorage.getItem("email")
+		}
+		const init = {
+		  method: "POST",
+		  headers: { "content-type": "application/json" },
+		  body: JSON.stringify(body)
+		}
+		fetch("http://localhost:48480/api/postedRequests", init)
+			.then(res => {
+				if (res.status === 200) {
+					
+			}
+		}).catch(err => {
+				console.log(err)
+			})
+		}
+
 	render () {
 		return (
 			<div>
+				<h2>Request Created by User</h2>
 				<br/>
-				<RequestsCard areAcceptedRequests={false} allowAccept={false} requests={this.state.requests}/>
+				<RequestsCard areAcceptedRequests={false} allowAccept={false} requests={this.state.myrequests}/>
+				<h2>Request Accepted by User</h2>
 				<br/>
-				<RequestsCard areAcceptedRequests={true} allowAccept={false} requests={this.state.requests}/>
-        />
+				<RequestsCard areAcceptedRequests={true} allowAccept={false} requests={this.state.acceptedRequests}/>
 			</div>
 		)
 	}

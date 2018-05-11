@@ -8,8 +8,7 @@ const style = {
 	width: 600,
 	margin: "auto",
 	marginTop: 50,
-	textAlign: "center",
-	display: "block"
+	textAlign: "center"
 }
 
 class Signup extends Component {
@@ -24,7 +23,7 @@ class Signup extends Component {
 		}
   }
   
-  setName = (event, name) => this.setState({ name })
+    setName = (event, name) => this.setState({ name })
 
 	setEmail = (event, email) => this.setState({ email })
 

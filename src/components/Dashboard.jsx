@@ -3,6 +3,7 @@ import RaisedButton from 'material-ui/RaisedButton'
 import OfferHelpForm from './OfferHelpForm'
 import NeedHelpForm from './NeedHelpForm'
 import RequestsCard from './RequestsCard'
+import { Grid, Row, Col } from 'react-bootstrap';
 
 class Dashboard extends Component {
   constructor (props) {
@@ -56,6 +57,7 @@ class Dashboard extends Component {
 
     onFinishFillingNeedHelpForm = () => {
         this.setState({ isEditingNeedHelpForm: false })
+        
     }
 
     onAcceptRequest = () => {
@@ -65,17 +67,33 @@ class Dashboard extends Component {
   render () {
     const {isEditingWantToHelpForm, isEditingNeedHelpForm} = this.state
     return (
-      <div>
-        <br/>
-        <RaisedButton label="I would like to help" primary onClick={this.onClickWantToHelp}/>
-        <br/>
-        <br/>
-        <RaisedButton label="I need help" primary onClick={this.onClickNeedHelp} />
-        <RequestsCard areAcceptedRequests={false} allowAccept={true} onCellClick={this.onCellClick} requests={this.state.requests}
-        onAccept={this.onAcceptRequest}/>
-        <OfferHelpForm shouldOpen={isEditingWantToHelpForm} onFinishFillingWantToHelpForm={this.onFinishFillingWantToHelpForm}/>
+      <Grid>
+          <Row>
+              <Col>
+              <p> “If you want academic help —ask Study Buddy.”</p>
+              </Col>
+          </Row>
+       
+        <Row className="show-grid">
+              <Col  xs={6} md={4}>
+              <RaisedButton label="I would like to help" primary onClick={this.onClickWantToHelp}/>
+              </Col>
+              <Col  xs={6} md={4}>
+              <RaisedButton label="I need help" primary onClick={this.onClickNeedHelp} />
+             </Col>
+             <Col  xs={6} md={4}>
+             <OfferHelpForm shouldOpen={isEditingWantToHelpForm} onFinishFillingWantToHelpForm={this.onFinishFillingWantToHelpForm}/>
         <NeedHelpForm shouldOpen={isEditingNeedHelpForm} onFinishFillingWantToHelpForm={this.onFinishFillingNeedHelpForm}/>
-      </div>
+              </Col>
+          </Row>
+          <h3>Current Request Pool</h3>
+          <Row>
+              <Col>
+              <RequestsCard areAcceptedRequests={false} allowAccept={true} onCellClick={this.onCellClick} requests={this.state.requests}
+        onAccept={this.onAcceptRequest}/>
+              </Col>
+          </Row>
+          </Grid>
     )
   }
 }

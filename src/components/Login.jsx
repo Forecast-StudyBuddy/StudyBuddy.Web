@@ -4,12 +4,11 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
 const style = {
-  height: 280,
-  width: 600,
+  height: "35%",
+  width: "95%",
   margin: 'auto',
   marginTop: 50,
-  textAlign: 'center',
-  display: 'block'
+  textAlign: 'center'
 }
 
 class Login extends Component {

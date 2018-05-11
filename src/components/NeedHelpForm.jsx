@@ -11,10 +11,32 @@ class NeedHelpForm extends Component {
 		super(props)
 
 		this.state = {
-			isUserHelping: false
+			isUserHelping: false,
+			text: null,
+			course_id: null,
 		}
 	}
-
+	requestAssistance = () => {
+		const body = {
+			email: window.localStorage.getItem("email")
+		}
+	
+		const init = {
+		  method: "POST",
+		  headers: { "content-type": "application/json" },
+		  body : JSON.stringify(body)
+		}
+		fetch("http://localhost:48480/api/requestAssistance", init)
+			.then(res => {
+				if (res.status === 200) {
+	
+			}
+		}).catch(err => {
+				console.log(err)
+			})
+		}
+		handleRequestChange = (event, text) => this.setState({ text })
+		
 	render () {
 		const { shouldOpen } = this.props
 
@@ -31,7 +53,6 @@ class NeedHelpForm extends Component {
 				onClick={this.props.onFinishFillingWantToHelpForm}
 			/>
 		]
-
 		return (
 			<Dialog
 				title="I need help"
@@ -58,6 +79,7 @@ class NeedHelpForm extends Component {
             so helpers have a better idea of what you need help with)"
 					multiLine={true}
 					rows={2}
+					onChange={this.handleRequestChange.bind(this)}
 					rowsMax={4}
 				/>
 			</Dialog>
