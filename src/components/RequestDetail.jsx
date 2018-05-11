@@ -38,9 +38,15 @@ class RequestDetail extends Component {
 				open={shouldOpen}
 			>
 				<br/>
+				{
+					!allowAccept && !allowFinish && request &&
+						request.user_id
+				}
+				{!allowAccept && !allowFinish && request && <br/>}
 				{request && request.course_id}
 				<br/>
 				{request && request.text}
+				
 			</Dialog>
 		)
 	}
