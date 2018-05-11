@@ -15,8 +15,11 @@ const MenuIcon = props => (
 		anchorOrigin={{horizontal: "left", vertical: "bottom"}}
 	>
 		<MenuItem primaryText="Profile" href="/profile"/>
-		<MenuItem primaryText="Sign out" onClick={() =>
-			window.localStorage.setItem("email", null)}/>
+		<MenuItem primaryText="Sign out" onClick={() => {
+			window.localStorage.setItem("email", null)
+			window.location = "/login"
+		}
+		}/>
 	</IconMenu>
 )
 
