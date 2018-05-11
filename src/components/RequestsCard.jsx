@@ -11,11 +11,10 @@ import {
 import RequestDetail from "./RequestDetail"
 
 const style = {
-	height: 300,
-	width: 800,
-	margin: "auto",
-	textAlign: "center",
-	display: "block"
+	height: '50%',
+	minWidth: 400,
+	minHeight: 200,
+	width: '90%'
 }
 
 class RequestsCard extends Component {

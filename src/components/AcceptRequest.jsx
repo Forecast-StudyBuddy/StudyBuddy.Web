@@ -98,7 +98,12 @@ class AcceptRequest extends Component {
 
   render () {
       const { userCourses, courseIndex, filteredRequests, shouldOpenConfirmation, requesterEmail } = this.state
+      const selectFieldStyle = {
+        width:'80%',
+        verticalAlign: 'middle !important',
+        textAlign: 'left !important',
 
+      }
     return (
         <div>
             <br/>
@@ -108,6 +113,7 @@ class AcceptRequest extends Component {
                 floatingLabelText="Course"
                 value={courseIndex}
                 onChange={this.handleChange}
+                style={selectFieldStyle}
 			>
                 {
                     userCourses.map((userCourse, index) => {
@@ -116,7 +122,7 @@ class AcceptRequest extends Component {
 					}
             </SelectField>
             <br/>
-            <RequestsCard areAcceptedRequests={false} allowAccept={true} allowFinish={false}
+            <RequestsCard  style= {selectFieldStyle} areAcceptedRequests={false} allowAccept={true} allowFinish={false}
                 requests={filteredRequests}
                 onAccept={this.onAcceptRequest}/>
             <ConfirmationPopup shouldOpen={shouldOpenConfirmation} title="Confirmation" text={`Thank you for accepting the help request! You

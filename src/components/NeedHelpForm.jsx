@@ -46,7 +46,9 @@ class NeedHelpForm extends Component {
 	render () {
 		const { shouldOpen } = this.props
 		const { currentCourses, courseIndex } = this.state
-
+		const fieldStyle = {
+			width:'80%'
+		  }
 		const actions = [
 			<FlatButton
 				label="Cancel"
@@ -63,7 +65,7 @@ class NeedHelpForm extends Component {
 
 		return (
 			<Dialog
-				title="I need help"
+				title="I Need Help"
 				actions={actions}
 				modal={true}
 				open={shouldOpen}
@@ -73,6 +75,7 @@ class NeedHelpForm extends Component {
 					floatingLabelText="Course"
 					value={courseIndex}
 					onChange={this.handleChange}
+					style={fieldStyle}
 				>
 					{
 						currentCourses.map((currentCourse, index) => {
@@ -89,6 +92,7 @@ class NeedHelpForm extends Component {
             			so helpers have a better idea of what you need help with)"
 					multiLine={true}
 					rows={2}
+					style={fieldStyle}
 					rowsMax={4}
 				/>
 			</Dialog>
